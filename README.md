@@ -27,7 +27,7 @@ Flatten Layer converts all of the learned features from the previous convolution
 
 Dense Layers are used to generate the final prediction. It takes in the number of output nodes and has an activation function which we will use the sigmoid activation function. The values for the sigmoid range between 0 and 1 that allows the model to perform a binary classification.
 
-The first Conv2D is the input layer which takes in the images that have been converted to 224x224x3 floating point tensors.
+The first Conv2D is the input layer which takes in the images that have been converted to 64x64x3 floating point tensors.
 
 ReLu (recified linear unit) is used as the activation function max(0,x) for the convolutional 2D layers. Essentially, until a threshold is hit, it doesn't activate!
 
