@@ -4,21 +4,30 @@ COVID-19 (coronavirus disease 2019) is an infectious disease caused by severe ac
 Positive Cases : https://github.com/ieee8023/covid-chestxray-dataset
 Normal Cases : https://www.kaggle.com/paultimothymooney/chest-xray-pneumonia
 
-# Network Architecture
-Model: "sequential_1"
+# Data scaling, normalization and augmentation
+Based on data inspection, images are scaled to a size of 244 by 244, normalized to values (0,1) and augmented by simple zoom and rotation to enhance the generalization.
 
-Layer (type)                 Output Shape              Param #   
-=================================================================
-conv2d_1 (Conv2D)            (None, 64, 64, 32)        896         
-max_pooling2d_1 (MaxPooling2 (None, 31, 31, 32)        0                
-conv2d_2 (Conv2D)            (None, 29, 29, 32)        9248     
-max_pooling2d_2 (MaxPooling2 (None, 14, 14, 32)        0                  
-conv2d_3 (Conv2D)            (None, 12, 12, 32)        9248              
-flatten_1 (Flatten)          (None, 4608)              0         
-dense_1 (Dense)              (None, 128)               0    
-dense_2 (Dense)              (None, 1)                 0       
-=================================================================
-Model Type: Sequential
-Total parameters: 609,473
-Trainable parameters: 609,473
-Non-trainable parameters: 0
+# Modeling:
+Keras' Convolutional Neural Network model was implemented to classify whether a patient has pneumonia. A CNN is used to capture the spatial distributions in an image by applying the aforementioned filters.
+
+Conv2D Layer is a set of learnable filters. Using the kernel filter, each filter transforms a part of the image to transform parts of the image. Conv2D also has two padding options:
+
+Valid Padding - reduces convolved feature dimensionality
+Same Padding - either increases or leaves the dimensionality alone.
+Essentially, the first Conv2D layer captures low-level features such as the images' edges, colors, and gradient orientation.
+
+Added Conv2D layers allow the model to learn high-level features such as identifying the ribs and lungs in the images.
+
+Max Pooling Layers reduce the spatial size of the convolved features and returns the max value from the portion of the image covered by the kernel for three reasons:
+
+Decrease the computation power to process the data by dimensionality reduction
+Extract dominant features by training the model
+Reduce noise
+Flatten Layer converts all of the learned features from the previous convolutional layers to a format that can be used by the densely connected neural layer
+
+Dense Layers are used to generate the final prediction. It takes in the number of output nodes and has an activation function which we will use the sigmoid activation function. The values for the sigmoid range between 0 and 1 that allows the model to perform a binary classification.
+
+The first Conv2D is the input layer which takes in the images that have been converted to 224x224x3 floating point tensors.
+
+ReLu (recified linear unit) is used as the activation function max(0,x) for the convolutional 2D layers. Essentially, until a threshold is hit, it doesn't activate!
+
