@@ -32,5 +32,5 @@ The first Conv2D is the input layer which takes in the images that have been con
 ReLu (recified linear unit) is used as the activation function max(0,x) for the convolutional 2D layers. Essentially, until a threshold is hit, it doesn't activate!
 
 # Model Evaluation:
-After running the CNN with 20 epochs with batch sizes of 32, it appears both training and validation accuracy scores converge to higher accuracy percentages, meaning the model is not overfit. Furthermore, the loss score for both training and validation decrease overall as the number of epochs increase. The model is able to predict whether a patient has covid-19 with 99.1% accuracy, which is not bad, but can definitely be better.
+After running the CNN with 20 epochs with batch sizes of 32, it appears both training and validation accuracy scores converge to higher accuracy percentages, meaning the model is not overfit. Furthermore, the loss score for both training and validation decrease overall as the number of epochs increase. The model is able to predict whether a patient has covid-19 with 98.9% accuracy, which is not bad, but can definitely be better.
 
